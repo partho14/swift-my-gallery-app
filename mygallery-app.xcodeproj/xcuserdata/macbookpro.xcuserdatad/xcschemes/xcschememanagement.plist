@@ -7,7 +7,25 @@
 		<key>mygallery-app.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>11</integer>
+			<integer>5</integer>
+		</dict>
+	</dict>
+	<key>SuppressBuildableAutocreation</key>
+	<dict>
+		<key>525464DF2ADEEBBC00D6BDF7</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>525464F82ADEEBC000D6BDF7</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>525465022ADEEBC100D6BDF7</key>
+		<dict>
+			<key>primary</key>
+			<true/>
 		</dict>
 	</dict>
 </dict>
