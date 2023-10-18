@@ -104,8 +104,121 @@
             </objects>
             <point key="canvasLocation" x="782.60869565217399" y="21.428571428571427"/>
         </scene>
+        <!--FullImageViewController-->
+        <scene sceneID="C9p-o7-VDi">
+            <objects>
+                <viewController storyboardIdentifier="FullImageViewController" title="FullImageViewController" id="sQR-BF-svH" customClass="FullImageViewController" customModule="ImageShowingApp" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="DIX-L7-p8O">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" alwaysBounceVertical="YES" alwaysBounceHorizontal="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" maximumZoomScale="10" translatesAutoresizingMaskIntoConstraints="NO" id="pW2-WY-U43">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                                <subviews>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" insetsLayoutMarginsFromSafeArea="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vcU-5c-n7I">
+                                        <rect key="frame" x="0.0" y="-48" width="414" height="896"/>
+                                    </imageView>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="vcU-5c-n7I" firstAttribute="trailing" secondItem="2sl-tl-fxk" secondAttribute="trailing" id="I8M-Y9-IuU"/>
+                                    <constraint firstItem="vcU-5c-n7I" firstAttribute="top" secondItem="2sl-tl-fxk" secondAttribute="top" id="Lne-9W-Lie"/>
+                                    <constraint firstAttribute="trailing" secondItem="vcU-5c-n7I" secondAttribute="trailing" id="N0i-Ak-O1x"/>
+                                    <constraint firstItem="vcU-5c-n7I" firstAttribute="leading" secondItem="2sl-tl-fxk" secondAttribute="leading" id="ZU7-nd-rEO"/>
+                                    <constraint firstItem="vcU-5c-n7I" firstAttribute="width" secondItem="pW2-WY-U43" secondAttribute="width" id="fgA-lH-15T"/>
+                                    <constraint firstItem="vcU-5c-n7I" firstAttribute="height" secondItem="pW2-WY-U43" secondAttribute="height" id="hIB-Iq-Xli"/>
+                                    <constraint firstAttribute="bottom" secondItem="vcU-5c-n7I" secondAttribute="bottom" id="mqn-SW-Tkh"/>
+                                </constraints>
+                                <viewLayoutGuide key="contentLayoutGuide" id="q4Y-gq-WAW"/>
+                                <viewLayoutGuide key="frameLayoutGuide" id="2sl-tl-fxk"/>
+                            </scrollView>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="VpL-jc-FHH">
+                                <rect key="frame" x="20" y="58" width="35" height="35"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <subviews>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="icon_back_full" translatesAutoresizingMaskIntoConstraints="NO" id="Oyo-vx-PM5">
+                                        <rect key="frame" x="0.0" y="0.0" width="35" height="35"/>
+                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                    </imageView>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="v3U-Ma-3lp">
+                                        <rect key="frame" x="0.0" y="0.0" width="35" height="35"/>
+                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                        <state key="normal" title="Button"/>
+                                        <buttonConfiguration key="configuration" style="plain"/>
+                                        <connections>
+                                            <action selector="backBtnPressed:" destination="sQR-BF-svH" eventType="touchUpInside" id="e0J-nG-Unu"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </view>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="k5X-fH-mCz">
+                                <rect key="frame" x="359" y="58" width="35" height="35"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
+                                <subviews>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="icon_share" translatesAutoresizingMaskIntoConstraints="NO" id="HqS-wi-kwd">
+                                        <rect key="frame" x="0.0" y="0.0" width="35" height="35"/>
+                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                    </imageView>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xn2-9O-2F1">
+                                        <rect key="frame" x="0.0" y="0.0" width="35" height="35"/>
+                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                        <state key="normal" title="Button"/>
+                                        <buttonConfiguration key="configuration" style="plain"/>
+                                        <connections>
+                                            <action selector="shareBtnPressed:" destination="sQR-BF-svH" eventType="touchUpInside" id="2nG-1t-0Ma"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </view>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="5a1-zP-xkO">
+                                <rect key="frame" x="316" y="58" width="35" height="35"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
+                                <subviews>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="icon_download" translatesAutoresizingMaskIntoConstraints="NO" id="zdi-eG-hsH">
+                                        <rect key="frame" x="0.0" y="0.0" width="35" height="35"/>
+                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                    </imageView>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nmP-w6-MU3">
+                                        <rect key="frame" x="0.0" y="0.0" width="35" height="35"/>
+                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                        <state key="normal" title="Button"/>
+                                        <buttonConfiguration key="configuration" style="plain"/>
+                                        <connections>
+                                            <action selector="downloadBtnPressed:" destination="sQR-BF-svH" eventType="touchUpInside" id="pQ2-iv-8JL"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </view>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="uHj-J0-udX"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="pW2-WY-U43" firstAttribute="leading" secondItem="uHj-J0-udX" secondAttribute="leading" id="2MF-uO-jbk"/>
+                            <constraint firstItem="pW2-WY-U43" firstAttribute="bottom" secondItem="DIX-L7-p8O" secondAttribute="bottomMargin" id="A1K-b6-fR9"/>
+                            <constraint firstItem="pW2-WY-U43" firstAttribute="centerX" secondItem="DIX-L7-p8O" secondAttribute="centerX" id="JbI-CG-yPG"/>
+                            <constraint firstItem="pW2-WY-U43" firstAttribute="top" secondItem="DIX-L7-p8O" secondAttribute="topMargin" id="mx9-r6-X1p"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="backView" destination="VpL-jc-FHH" id="CUJ-yR-O0U"/>
+                        <outlet property="deleteView" destination="5a1-zP-xkO" id="dxH-6E-SKm"/>
+                        <outlet property="imageView" destination="vcU-5c-n7I" id="7ps-iP-EpE"/>
+                        <outlet property="mainView" destination="DIX-L7-p8O" id="R9S-Re-Yet"/>
+                        <outlet property="scrollView" destination="pW2-WY-U43" id="FyD-2F-ygJ"/>
+                        <outlet property="shareView" destination="k5X-fH-mCz" id="VR9-FA-hBg"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="PDL-O1-agI" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1669.5652173913045" y="20.758928571428569"/>
+        </scene>
     </scenes>
     <resources>
+        <image name="icon_back_full" width="21.333333969116211" height="21.333333969116211"/>
+        <image name="icon_download" width="21.333333969116211" height="21.333333969116211"/>
+        <image name="icon_share" width="16" height="16"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

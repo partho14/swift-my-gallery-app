@@ -55,7 +55,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         let storyBoard = UIStoryboard(name: "Main", bundle: nil)
         self.homeViewController = storyBoard.instantiateViewController(withIdentifier: "HomeViewController") as? HomeViewController
-        self.window?.rootViewController = homeViewController
+        let navCon = UINavigationController.init(rootViewController: homeViewController!)
+        navCon.navigationBar.isHidden = true
+        navCon.toolbar.isHidden = true
+        self.window?.rootViewController = navCon
         self.window?.backgroundColor = UIColor.white
         self.window?.makeKeyAndVisible()
         return true

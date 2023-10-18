@@ -55,6 +55,15 @@ class HomeViewController: UIViewController, UICollectionViewDelegate, UICollecti
         ])
         return cell
     }
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        guard let fullImageViewController = storyboard.instantiateViewController(withIdentifier: "FullImageViewController") as? FullImageViewController else {
+            print("This means you haven't set your view controller identifier properly.")
+            return
+        }
+        fullImageViewController.urlLink = (appDelegate.imageCollectDataSync.imageDataModel[indexPath.row].src?.large)!
+        self.navigationController?.pushViewController(fullImageViewController, animated: true)
+    }
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         if(indexPath.row == 0){
             return CGSize(width: self.imageCollectionView.frame.size.width, height: 180.0)
