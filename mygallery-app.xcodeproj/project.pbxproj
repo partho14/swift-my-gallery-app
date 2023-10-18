@@ -10,6 +10,8 @@
 		0E25DBD3142364D3760F2174 /* Pods_mygallery_app.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 788409D295FF7D4357D0F389 /* Pods_mygallery_app.framework */; };
 		48ECF564E707F5F64D676E5D /* Pods_mygallery_app_mygallery_appUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EB97F649852B69A8F3D3C83F /* Pods_mygallery_app_mygallery_appUITests.framework */; };
 		521C8F7D2AE038CD00A9A4AD /* FullImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 521C8F7C2AE038CD00A9A4AD /* FullImageViewController.swift */; };
+		521C8F812AE0554600A9A4AD /* Toast.swift in Sources */ = {isa = PBXBuildFile; fileRef = 521C8F802AE0554600A9A4AD /* Toast.swift */; };
+		521C8F832AE06A9D00A9A4AD /* LoadingIndicatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 521C8F822AE06A9D00A9A4AD /* LoadingIndicatorView.swift */; };
 		525464E42ADEEBBC00D6BDF7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 525464E32ADEEBBC00D6BDF7 /* AppDelegate.swift */; };
 		525464E82ADEEBBC00D6BDF7 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 525464E72ADEEBBC00D6BDF7 /* ViewController.swift */; };
 		525464EB2ADEEBBC00D6BDF7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 525464E92ADEEBBC00D6BDF7 /* Main.storyboard */; };
@@ -48,6 +50,8 @@
 		29A81678B86B8DCEEE3D0E26 /* Pods_mygallery_appTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_mygallery_appTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5096E3686A87731FAB43D8D5 /* Pods-mygallery-app.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-mygallery-app.debug.xcconfig"; path = "Target Support Files/Pods-mygallery-app/Pods-mygallery-app.debug.xcconfig"; sourceTree = "<group>"; };
 		521C8F7C2AE038CD00A9A4AD /* FullImageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FullImageViewController.swift; sourceTree = "<group>"; };
+		521C8F802AE0554600A9A4AD /* Toast.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Toast.swift; sourceTree = "<group>"; };
+		521C8F822AE06A9D00A9A4AD /* LoadingIndicatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingIndicatorView.swift; sourceTree = "<group>"; };
 		525464E02ADEEBBC00D6BDF7 /* mygallery-app.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "mygallery-app.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		525464E32ADEEBBC00D6BDF7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		525464E72ADEEBBC00D6BDF7 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -133,6 +137,7 @@
 				525465172ADEF6B500D6BDF7 /* ViewModel */,
 				525465162ADEF6A000D6BDF7 /* Constants */,
 				525464E32ADEEBBC00D6BDF7 /* AppDelegate.swift */,
+				521C8F822AE06A9D00A9A4AD /* LoadingIndicatorView.swift */,
 				525464E92ADEEBBC00D6BDF7 /* Main.storyboard */,
 				525464EF2ADEEBC000D6BDF7 /* Assets.xcassets */,
 				525464F12ADEEBC000D6BDF7 /* LaunchScreen.storyboard */,
@@ -163,6 +168,7 @@
 			isa = PBXGroup;
 			children = (
 				5254651E2ADEF7DB00D6BDF7 /* Constants.swift */,
+				521C8F802AE0554600A9A4AD /* Toast.swift */,
 			);
 			path = Constants;
 			sourceTree = "<group>";
@@ -466,11 +472,13 @@
 			files = (
 				525464EE2ADEEBBC00D6BDF7 /* mygallery_app.xcdatamodeld in Sources */,
 				5254651B2ADEF7A600D6BDF7 /* ImageDataModel.swift in Sources */,
+				521C8F832AE06A9D00A9A4AD /* LoadingIndicatorView.swift in Sources */,
 				521C8F7D2AE038CD00A9A4AD /* FullImageViewController.swift in Sources */,
 				525465262ADF03B200D6BDF7 /* ImageCollectionViewCell.swift in Sources */,
 				5254651D2ADEF7CB00D6BDF7 /* ImageCollectDataSync.swift in Sources */,
 				525464E82ADEEBBC00D6BDF7 /* ViewController.swift in Sources */,
 				525464E42ADEEBBC00D6BDF7 /* AppDelegate.swift in Sources */,
+				521C8F812AE0554600A9A4AD /* Toast.swift in Sources */,
 				525465212ADEFACE00D6BDF7 /* HomeViewController.swift in Sources */,
 				5254651F2ADEF7DB00D6BDF7 /* Constants.swift in Sources */,
 			);

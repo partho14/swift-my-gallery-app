@@ -47,6 +47,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
     var homeViewController: HomeViewController?
+    var FullImageViewController: FullImageViewController?
     var currentNavigation: UINavigationController?
     var imageCollectDataSync: ImageCollectDataSync = ImageCollectDataSync.sharedInstance
     var constants: Constants = Constants.sharedInstance

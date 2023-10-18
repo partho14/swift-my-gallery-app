@@ -19,9 +19,10 @@ class FullImageViewController: UIViewController, UIScrollViewDelegate {
     
     var urlLink: String = ""
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        print(urlLink)
         scrollView.zoomScale = 1
         scrollView.minimumZoomScale = 0.25
         scrollView.maximumZoomScale = 5.0
@@ -53,10 +54,112 @@ class FullImageViewController: UIViewController, UIScrollViewDelegate {
         
     }
     @IBAction func downloadBtnPressed(_ sender: Any) {
-        
+        LoadingIndicatorView.show()
+        if let imageUrl = URL(string: urlLink) {
+            downloadImage(from: imageUrl) { result in
+                DispatchQueue.main.async {
+                    switch result {
+                    case .success(let localFileURL):
+                        print("Image downloaded and saved at \(localFileURL)")
+                        LoadingIndicatorView.hide()
+                        self.showToast(message: "Image downloaded and saved Successfully", seconds: 2, error: false)
+                        
+                    case .failure(let error):
+                        print("Error downloading image: \(error)")
+                        LoadingIndicatorView.hide()
+                        self.showToast(message: "Download Failed, Please try again", seconds: 2, error: true)
+                    }
+                }
+            }
+        }
     }
     @IBAction func shareBtnPressed(_ sender: Any) {
-        
+        LoadingIndicatorView.show()
+        if let imageUrl = URL(string: urlLink) {
+            downloadImage(from: imageUrl) { result in
+                DispatchQueue.main.async {
+                    switch result {
+                    case .success(let localFileURL):
+                        //if download successful
+                        print("Image downloaded and saved at \(localFileURL)")
+                        self.shareImage(from: localFileURL)
+                        
+                    case .failure(let error):
+                        //if download failed
+                        print("Error downloading image: \(error)")
+                        LoadingIndicatorView.hide()
+                        self.showToast(message: "Something went wrong", seconds: 2, error: true)
+                    }
+                }
+            }
+        }
     }
-}
+    
+    //download function for image download
+    func downloadImage(from url: URL, completion: @escaping (Result<URL, Error>) -> Void) {
+        let task = URLSession.shared.dataTask(with: url) { (data, response, error) in
+            if let error = error {
+                completion(.failure(error))
+                return
+            }
+            
+            guard let data = data else {
+                let error = NSError(domain: "com.proyojon.mygallery-app", code: 0, userInfo: [NSLocalizedDescriptionKey: "No data received"])
+                completion(.failure(error))
+                return
+            }
+            
+            // Get the document directory URL
+            let documentDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
+            
+            // Generate a unique file name for the image
+            let uniqueFileName = UUID().uuidString
+            let fileURL = documentDirectory.appendingPathComponent(uniqueFileName).appendingPathExtension("jpeg")
+            
+            do {
+                try data.write(to: fileURL)
+                completion(.success(fileURL))
+            } catch let error {
+                completion(.failure(error))
+            }
+        }
+        
+        task.resume()
+    }
+    
+    //this function for shared image
+    func shareImage(from localFileURL: URL) {
+            let activityViewController = UIActivityViewController(activityItems: [localFileURL], applicationActivities: nil)
+            activityViewController.excludedActivityTypes = [
+                .postToTwitter,
+                .postToWeibo,
+                .message,
+                .print,
+                .copyToPasteboard,
+                .assignToContact,
+                .saveToCameraRoll,
+                .addToReadingList,
+                .postToVimeo,
+                .postToTencentWeibo,
+                .airDrop,
+                .openInIBooks
+            ]
+            activityViewController.isModalInPresentation = true
+            activityViewController.popoverPresentationController?.sourceView = self.view
+            LoadingIndicatorView.hide()
+            self.present(activityViewController, animated: true, completion: nil)
+        }
+    
+    //show toast purpose
+    func showToast(message : String, seconds: Double, error: Bool){
+        let alert = UIAlertController(title: nil, message: message, preferredStyle: .actionSheet)
+            alert.view.backgroundColor = error ? .red : .blue
+            alert.view.alpha = 0.75
+            alert.view.layer.cornerRadius = 15
+            self.present(alert, animated: true)
+            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + seconds) {
+                alert.dismiss(animated: true)
+            }
+        }
 
+}
