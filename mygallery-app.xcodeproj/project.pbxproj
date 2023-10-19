@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		0E25DBD3142364D3760F2174 /* Pods_mygallery_app.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 788409D295FF7D4357D0F389 /* Pods_mygallery_app.framework */; };
+		0E311D922AE12A4100F6FD23 /* FullImageDataSync.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E311D912AE12A4100F6FD23 /* FullImageDataSync.swift */; };
 		48ECF564E707F5F64D676E5D /* Pods_mygallery_app_mygallery_appUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EB97F649852B69A8F3D3C83F /* Pods_mygallery_app_mygallery_appUITests.framework */; };
 		521C8F7D2AE038CD00A9A4AD /* FullImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 521C8F7C2AE038CD00A9A4AD /* FullImageViewController.swift */; };
 		521C8F812AE0554600A9A4AD /* Toast.swift in Sources */ = {isa = PBXBuildFile; fileRef = 521C8F802AE0554600A9A4AD /* Toast.swift */; };
@@ -47,6 +48,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0E311D912AE12A4100F6FD23 /* FullImageDataSync.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FullImageDataSync.swift; sourceTree = "<group>"; };
 		29A81678B86B8DCEEE3D0E26 /* Pods_mygallery_appTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_mygallery_appTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5096E3686A87731FAB43D8D5 /* Pods-mygallery-app.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-mygallery-app.debug.xcconfig"; path = "Target Support Files/Pods-mygallery-app/Pods-mygallery-app.debug.xcconfig"; sourceTree = "<group>"; };
 		521C8F7C2AE038CD00A9A4AD /* FullImageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FullImageViewController.swift; sourceTree = "<group>"; };
@@ -177,6 +179,7 @@
 			isa = PBXGroup;
 			children = (
 				5254651C2ADEF7CB00D6BDF7 /* ImageCollectDataSync.swift */,
+				0E311D912AE12A4100F6FD23 /* FullImageDataSync.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -477,6 +480,7 @@
 				525465262ADF03B200D6BDF7 /* ImageCollectionViewCell.swift in Sources */,
 				5254651D2ADEF7CB00D6BDF7 /* ImageCollectDataSync.swift in Sources */,
 				525464E82ADEEBBC00D6BDF7 /* ViewController.swift in Sources */,
+				0E311D922AE12A4100F6FD23 /* FullImageDataSync.swift in Sources */,
 				525464E42ADEEBBC00D6BDF7 /* AppDelegate.swift in Sources */,
 				521C8F812AE0554600A9A4AD /* Toast.swift in Sources */,
 				525465212ADEFACE00D6BDF7 /* HomeViewController.swift in Sources */,
@@ -669,6 +673,7 @@
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 15;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -677,7 +682,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.proyojon.mygallery-app";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = An_Development;
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = An_Development_v2;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -703,6 +708,7 @@
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 15;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -711,7 +717,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.proyojon.mygallery-app";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = An_Development;
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = An_Development_v2;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";

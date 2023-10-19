@@ -17,6 +17,7 @@ class HomeViewController: UIViewController, UICollectionViewDelegate, UICollecti
         super.viewDidLoad()
         appDelegate.imageCollectDataSync.imageDataModel.removeAll()
         self.fatchData()
+        self.fatchCachedData()
         imageCollectionView.refreshControl = UIRefreshControl()
         imageCollectionView.refreshControl?.addTarget(self, action: #selector(dataSyncFromApi), for: .valueChanged)
     }
@@ -27,6 +28,7 @@ class HomeViewController: UIViewController, UICollectionViewDelegate, UICollecti
             appDelegate.imageCollectDataSync.imageDataModel.removeAll()
             self.imageCollectionView.refreshControl?.endRefreshing()
             self.fatchData()
+            
         })
     }
     
@@ -35,6 +37,9 @@ class HomeViewController: UIViewController, UICollectionViewDelegate, UICollecti
             await appDelegate.imageCollectDataSync.alamofireApiRequest()
             self.imageCollectionView.reloadData()
         }
+    }
+    func fatchCachedData(){
+        appDelegate.imageCollectDataSync.fatchCachedData()
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -62,6 +67,7 @@ class HomeViewController: UIViewController, UICollectionViewDelegate, UICollecti
             return
         }
         fullImageViewController.urlLink = (appDelegate.imageCollectDataSync.imageDataModel[indexPath.row].src?.large)!
+        fullImageViewController.uniqueId = "\((appDelegate.imageCollectDataSync.imageDataModel[indexPath.row].id)!)"
         self.navigationController?.pushViewController(fullImageViewController, animated: true)
     }
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {

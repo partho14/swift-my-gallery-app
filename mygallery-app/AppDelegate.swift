@@ -50,6 +50,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var FullImageViewController: FullImageViewController?
     var currentNavigation: UINavigationController?
     var imageCollectDataSync: ImageCollectDataSync = ImageCollectDataSync.sharedInstance
+    var fullImageDataSync: FullImageDataSync = FullImageDataSync.sharedInstance
     var constants: Constants = Constants.sharedInstance
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {

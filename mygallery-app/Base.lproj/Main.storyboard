@@ -2,6 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="N3c-yM-1PH">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
+        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21679"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -107,7 +108,7 @@
         <!--FullImageViewController-->
         <scene sceneID="C9p-o7-VDi">
             <objects>
-                <viewController storyboardIdentifier="FullImageViewController" title="FullImageViewController" id="sQR-BF-svH" customClass="FullImageViewController" customModule="ImageShowingApp" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="FullImageViewController" title="FullImageViewController" id="sQR-BF-svH" customClass="FullImageViewController" customModule="mygallery_app" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="DIX-L7-p8O">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -143,7 +144,7 @@
                                         <rect key="frame" x="0.0" y="0.0" width="35" height="35"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                         <state key="normal" title="Button"/>
-                                        <buttonConfiguration key="configuration" style="plain"/>
+                                        <buttonConfiguration key="configuration" style="plain" title=" "/>
                                         <connections>
                                             <action selector="backBtnPressed:" destination="sQR-BF-svH" eventType="touchUpInside" id="e0J-nG-Unu"/>
                                         </connections>
@@ -163,7 +164,7 @@
                                         <rect key="frame" x="0.0" y="0.0" width="35" height="35"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                         <state key="normal" title="Button"/>
-                                        <buttonConfiguration key="configuration" style="plain"/>
+                                        <buttonConfiguration key="configuration" style="plain" title=" "/>
                                         <connections>
                                             <action selector="shareBtnPressed:" destination="sQR-BF-svH" eventType="touchUpInside" id="2nG-1t-0Ma"/>
                                         </connections>
@@ -183,7 +184,7 @@
                                         <rect key="frame" x="0.0" y="0.0" width="35" height="35"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                         <state key="normal" title="Button"/>
-                                        <buttonConfiguration key="configuration" style="plain"/>
+                                        <buttonConfiguration key="configuration" style="plain" title=" "/>
                                         <connections>
                                             <action selector="downloadBtnPressed:" destination="sQR-BF-svH" eventType="touchUpInside" id="pQ2-iv-8JL"/>
                                         </connections>

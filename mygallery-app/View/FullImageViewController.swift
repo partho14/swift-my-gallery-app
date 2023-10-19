@@ -18,11 +18,13 @@ class FullImageViewController: UIViewController, UIScrollViewDelegate {
     @IBOutlet weak var deleteView: UIView!
     
     var urlLink: String = ""
+    var uniqueId: String = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         print(urlLink)
+        print(uniqueId)
         scrollView.zoomScale = 1
         scrollView.minimumZoomScale = 0.25
         scrollView.maximumZoomScale = 5.0
@@ -56,7 +58,7 @@ class FullImageViewController: UIViewController, UIScrollViewDelegate {
     @IBAction func downloadBtnPressed(_ sender: Any) {
         LoadingIndicatorView.show()
         if let imageUrl = URL(string: urlLink) {
-            downloadImage(from: imageUrl) { result in
+            appDelegate.fullImageDataSync.downloadImage(from: imageUrl, uniqueId: uniqueId) { result in
                 DispatchQueue.main.async {
                     switch result {
                     case .success(let localFileURL):
@@ -76,7 +78,7 @@ class FullImageViewController: UIViewController, UIScrollViewDelegate {
     @IBAction func shareBtnPressed(_ sender: Any) {
         LoadingIndicatorView.show()
         if let imageUrl = URL(string: urlLink) {
-            downloadImage(from: imageUrl) { result in
+            appDelegate.fullImageDataSync.downloadImage(from: imageUrl, uniqueId: uniqueId) { result in
                 DispatchQueue.main.async {
                     switch result {
                     case .success(let localFileURL):
@@ -93,38 +95,6 @@ class FullImageViewController: UIViewController, UIScrollViewDelegate {
                 }
             }
         }
-    }
-    
-    //download function for image download
-    func downloadImage(from url: URL, completion: @escaping (Result<URL, Error>) -> Void) {
-        let task = URLSession.shared.dataTask(with: url) { (data, response, error) in
-            if let error = error {
-                completion(.failure(error))
-                return
-            }
-            
-            guard let data = data else {
-                let error = NSError(domain: "com.proyojon.mygallery-app", code: 0, userInfo: [NSLocalizedDescriptionKey: "No data received"])
-                completion(.failure(error))
-                return
-            }
-            
-            // Get the document directory URL
-            let documentDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
-            
-            // Generate a unique file name for the image
-            let uniqueFileName = UUID().uuidString
-            let fileURL = documentDirectory.appendingPathComponent(uniqueFileName).appendingPathExtension("jpeg")
-            
-            do {
-                try data.write(to: fileURL)
-                completion(.success(fileURL))
-            } catch let error {
-                completion(.failure(error))
-            }
-        }
-        
-        task.resume()
     }
     
     //this function for shared image
