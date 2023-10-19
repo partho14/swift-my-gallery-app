@@ -12,14 +12,13 @@ class HomeViewController: UIViewController, UICollectionViewDelegate, UICollecti
     
     
     @IBOutlet weak var imageCollectionView: UICollectionView!
+    @IBOutlet weak var noImageText: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         appDelegate.imageCollectDataSync.imageDataModel.removeAll()
+        //appDelegate.imageCollectDataSync.clearSharedPrefsData()
         self.fatchData()
-        self.fatchCachedData()
-        imageCollectionView.refreshControl = UIRefreshControl()
-        imageCollectionView.refreshControl?.addTarget(self, action: #selector(dataSyncFromApi), for: .valueChanged)
     }
     
     @objc func dataSyncFromApi(){
@@ -33,42 +32,78 @@ class HomeViewController: UIViewController, UICollectionViewDelegate, UICollecti
     }
     
     func fatchData() {
-        Task {
-            await appDelegate.imageCollectDataSync.alamofireApiRequest()
-            self.imageCollectionView.reloadData()
+        appDelegate.imageCollectDataSync.fetchData{ [weak self] (data, error) in
+            if let data = data {
+                DispatchQueue.main.async {
+                    appDelegate.imageCollectDataSync.isInternetConnected = true
+                    self?.imageCollectionView.refreshControl = UIRefreshControl()
+                    self?.imageCollectionView.refreshControl?.addTarget(self, action: #selector(self?.dataSyncFromApi), for: .valueChanged)
+                    self?.imageCollectionView.reloadData()
+                }
+            } else if let error = error {
+                appDelegate.imageCollectDataSync.isInternetConnected = false
+                print("Error fetching data: \(error.localizedDescription)")
+                DispatchQueue.main.async {
+                    let data = appDelegate.imageCollectDataSync.fatchCachedData()
+                    if(data){
+                        print("Total Store Image Count: \(appDelegate.imageCollectDataSync.storePrefsDataModel.count)")
+                        self?.imageCollectionView.alpha = 1
+                        self?.noImageText.alpha = 0
+                        self?.imageCollectionView.reloadData()
+                    }else{
+                        self?.imageCollectionView.alpha = 0
+                        self?.noImageText.alpha = 1
+                    }
+                }
+            }
         }
-    }
-    func fatchCachedData(){
-        appDelegate.imageCollectDataSync.fatchCachedData()
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return appDelegate.imageCollectDataSync.imageDataModel.count;
+        return appDelegate.imageCollectDataSync.isInternetConnected ? appDelegate.imageCollectDataSync.imageDataModel.count : appDelegate.imageCollectDataSync.storePrefsDataModel.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell: ImageCollectionViewCell = collectionView.dequeueReusableCell(withReuseIdentifier: "ImageCollectionViewCell", for: indexPath as IndexPath) as! ImageCollectionViewCell
-        let info = appDelegate.imageCollectDataSync.imageDataModel[indexPath.row].src?.medium
-        let url = URL(string: info!)
-        let processor = DownsamplingImageProcessor(size: cell.cellImageView.bounds.size)
-                     |> RoundCornerImageProcessor(cornerRadius: 0)
-        cell.cellImageView.kf.indicatorType = .activity
-        cell.cellImageView.kf.setImage(with: url,options: [
-            .processor(processor),
-            .transition(.fade(1)),
-            .cacheOriginalImage
-        ])
+        if(appDelegate.imageCollectDataSync.isInternetConnected){
+            let info = appDelegate.imageCollectDataSync.imageDataModel[indexPath.row].src?.medium
+            let url = URL(string: info!)
+            let processor = DownsamplingImageProcessor(size: cell.cellImageView.bounds.size)
+                         |> RoundCornerImageProcessor(cornerRadius: 0)
+            cell.cellImageView.kf.indicatorType = .activity
+            cell.cellImageView.kf.setImage(with: url,options: [
+                .processor(processor),
+                .transition(.fade(1)),
+                .cacheOriginalImage
+            ])
+        }else{
+            let uniqueFileName = "\(appDelegate.imageCollectDataSync.storePrefsDataModel[indexPath.row].id!)"
+            // Get the document directory URL
+            let documentDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
+            let fileURL = documentDirectory.appendingPathComponent(uniqueFileName).appendingPathExtension("jpeg")
+            print(fileURL);
+            // Load the image from the file path
+            if let image = UIImage(contentsOfFile: "\(fileURL)") {
+                cell.cellImageView.image = image
+            } else {
+                // Handle the case where the image couldn't be loaded
+                print("Failed to load the image from the file path")
+            }
+            
+        }
         return cell
     }
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        guard let fullImageViewController = storyboard.instantiateViewController(withIdentifier: "FullImageViewController") as? FullImageViewController else {
-            print("This means you haven't set your view controller identifier properly.")
-            return
+        if(appDelegate.imageCollectDataSync.isInternetConnected){
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            guard let fullImageViewController = storyboard.instantiateViewController(withIdentifier: "FullImageViewController") as? FullImageViewController else {
+                print("This means you haven't set your view controller identifier properly.")
+                return
+            }
+            fullImageViewController.urlLink = (appDelegate.imageCollectDataSync.imageDataModel[indexPath.row].src?.large)!
+            fullImageViewController.uniqueId = "\((appDelegate.imageCollectDataSync.imageDataModel[indexPath.row].id)!)"
+            self.navigationController?.pushViewController(fullImageViewController, animated: true)
         }
-        fullImageViewController.urlLink = (appDelegate.imageCollectDataSync.imageDataModel[indexPath.row].src?.large)!
-        fullImageViewController.uniqueId = "\((appDelegate.imageCollectDataSync.imageDataModel[indexPath.row].id)!)"
-        self.navigationController?.pushViewController(fullImageViewController, animated: true)
     }
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         if(indexPath.row == 0){
@@ -85,10 +120,15 @@ class HomeViewController: UIViewController, UICollectionViewDelegate, UICollecti
         let visibleCells = imageCollectionView.visibleCells
         if let firstCell = visibleCells.last {
             if let indexPath = imageCollectionView.indexPath(for: firstCell){
-                print(indexPath.row)
-                if (indexPath.row >= (appDelegate.imageCollectDataSync.imageDataModel.count - 10)){
-                    appDelegate.imageCollectDataSync.currentPage = appDelegate.imageCollectDataSync.currentPage + 1
-                    self.fatchData()
+                if(appDelegate.imageCollectDataSync.isInternetConnected){
+                    if (indexPath.row >= (appDelegate.imageCollectDataSync.imageDataModel.count - 10)){
+                        if(appDelegate.imageCollectDataSync.currentPage == 1){
+                            appDelegate.imageCollectDataSync.cachedImage()
+                        }
+                        appDelegate.imageCollectDataSync.currentPage = appDelegate.imageCollectDataSync.currentPage + 1
+                        
+                        self.fatchData()
+                    }
                 }
             }
         }
